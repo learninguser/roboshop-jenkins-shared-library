@@ -1,0 +1,29 @@
+def call(){
+    pipeline{
+        agent{
+            label 'workstation'
+        }
+        stages{
+            stage('Compile/Build'){
+                steps{
+                    echo 'Compile/build'
+                }
+            }
+            stage('Unit Tests'){
+                steps{
+                    echo 'Unit Tests'
+                }
+            }
+            stage('Quality control'){
+                steps{
+                    echo 'Quality control'
+                }
+            }
+            stage('Upload code to centralised place'){
+                steps{
+                    echo 'Upload code to centralised place'
+                }
+            }
+        }
+    }
+}
