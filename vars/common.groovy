@@ -1,5 +1,6 @@
 def compile(){
     if(app_lang == "nodejs"){
+        // sh 'env'
         sh "npm install"
     }
     if(app_lang == "maven"){
@@ -16,11 +17,7 @@ def unittests(){
     if(app_lang == "nodejs"){
         // There are no test cases written by the developer
         // println("Test cases");
-        try{
-            sh "npm test" 
-        } catch(exception e){
-            send_email("Unit test cases failed")
-        }
+        sh "npm test"
     }
     if(app_lang == "maven"){
         sh "mvn test"
@@ -32,5 +29,6 @@ def unittests(){
 }
 
 def send_email(message){
-    println(message);
+    // println(message);
+    mail bcc: '', body: "Job Failed - ${JOB_BASE_NAME}\nJenkins URL - ${JOB_URL}", cc: '', from: 'icspavan@gmail.com', replyTo: '', subject: "Jenkins Job Failed - ${JOB_BASE_NAME}", to: 'icspavan@gmail.com'
 }
