@@ -13,7 +13,7 @@ def compile(){
     }
 }
 
-def unittests(){
+def unittest(){
     if(app_lang == "nodejs"){
         // There are no test cases written by the developer
         // println("Test cases");
