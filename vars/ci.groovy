@@ -31,7 +31,7 @@ def call(){
                 }
             }
         }
-    } catch(exception e){
+    } catch(Exception e){
         send_email("Unit test cases failed")
     }
 }
