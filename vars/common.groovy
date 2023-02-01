@@ -23,7 +23,7 @@ def unittest(){
         sh "mvn test"
     }
     if(app_lang == "python"){
-        sh "python -m unittest"
+        sh "python3.9 -m unittest"
     }
 
 }
