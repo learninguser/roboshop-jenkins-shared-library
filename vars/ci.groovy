@@ -4,6 +4,12 @@ def call(){
         env.SONAR_EXTRA_OPTS = " "
     }
 
+    if(!env.TAG_NAME) {
+        env.PUSH_CODE = "false"
+    }else{
+        env.PUSH_CODE = "true"
+    }
+
     try{
         pipeline{
             node('workstation'){
@@ -25,8 +31,10 @@ def call(){
                         echo "Sonar Scan"
                     }
                 }
-                stage('Upload code to centralised place'){
-                    echo 'Upload code to centralised place'
+                if(env.PUSH_CODE == "true"){
+                    stage('Upload code to centralised place'){
+                        echo 'Upload code to centralised place'
+                    }
                 }
             }
         }
