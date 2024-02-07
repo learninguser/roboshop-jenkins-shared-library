@@ -8,7 +8,6 @@ def call(Map configMap) {
         environment{
             projectName = "roboshop"
             component = "catalogue"
-            nexusURL = "172.31.35.84:8081"
             packageVersion = ''
         }
         options {
@@ -62,7 +61,7 @@ def call(Map configMap) {
                     nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        nexusUrl: "${nexusURL}",
+                        nexusUrl: pipelineGlobals.nexusURL(),
                         groupId: "com.${projectName}",
                         version: "${packageVersion}",
                         repository: "${component}",
