@@ -7,7 +7,6 @@ def call(Map configMap) {
         }
         environment{
             projectName = "roboshop"
-            component = "catalogue"
             packageVersion = ''
         }
         options {
@@ -52,7 +51,7 @@ def call(Map configMap) {
             stage('Build'){
                 steps {
                     sh """
-                        zip -q -r ${component}.zip ./* -x ".git" -x "*.zip" -x "Jenkinsfile"
+                        zip -q -r ${configMap.component}.zip ./* -x ".git" -x "*.zip" -x "Jenkinsfile"
                     """
                 }
             }
@@ -64,12 +63,12 @@ def call(Map configMap) {
                         nexusUrl: pipelineGlobals.nexusURL(),
                         groupId: "com.${projectName}",
                         version: "${packageVersion}",
-                        repository: "${component}",
+                        repository: "${configMap.component}",
                         credentialsId: 'nexus-auth',
                         artifacts: [
-                            [artifactId: "${component}",
+                            [artifactId: "${configMap.component}",
                             classifier: '',
-                            file: "${component}.zip",
+                            file: "${configMap.component}.zip",
                             type: 'zip']
                         ]
                     )
@@ -87,7 +86,7 @@ def call(Map configMap) {
                             string(name: 'version', value: "$packageVersion"),
                             string(name: 'environment', value: "dev")
                         ]
-                        build job: "catalogue-deploy", wait: false, parameters: myParams
+                        build job: "${configMap.component}-deploy", wait: true, parameters: myParams
                     }
                 }
             }
