@@ -1,7 +1,7 @@
 def checkout(){
     stage('Checkout code'){
         cleanWs() // clean the workspace
-        echo "Pull latest code"
+        git branch: 'master', url: "${env.REPO_URL}"
     }
 }
 
