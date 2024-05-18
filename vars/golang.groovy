@@ -3,6 +3,7 @@ def call(){
         common.checkout()
         common.compile('golang')
         common.codeQuality()
+        common.testCases("golang")
         common.release()
     }
 }
