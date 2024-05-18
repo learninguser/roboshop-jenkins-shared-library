@@ -44,3 +44,10 @@ def release(){
         echo "Release a Package"
     }
 }
+
+def notifyDeveloper(){
+    stage("Notify Developer"){
+        mail bcc: '', body: "<h1>Pipeline Failure</h1><br>Project Name: ${COMPONENT}\nURL = ${BUILD_URL}", cc: '', charset: 'UTF-8', from: 'icspavan@gmail.com', mimeType: 'text/html', replyTo: 'icspavan@gmail.com', subject: "ERROR CI: Component Name - ${COMPONENT}", to: "icspavan@gmail.com"
+        sh 'exit 1' // to mark pipeline job is a failure in jenkins UI
+    }
+}
